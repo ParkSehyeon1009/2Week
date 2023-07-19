@@ -126,7 +126,7 @@ sample = ((i < 2) ? !i ? a : b : c)
 ```
 단 이렇게 중첩해서 사용하면 코드를 이해하기 어려워 질수도 있다.
 
-# 함수 - C++의 프로그래밍 모듈
+# 함수 : C++의 프로그래밍 모듈
 **함수 매개변수와 값으로 전달하기** <br>
 C++은 함수 매개변수를 값으로 전달한다. 아래의 예제를 통해 알아보겠다.
 ```cpp
@@ -202,3 +202,31 @@ int Sum_score(int *x, int len)
 ```
 *arr, int arr[] 두개 모두 int 형을 지시하는 포인터를 의미하기 때문이다. <br>
 단 int arr[] 은 배열의 **첫 번째 원소를 지시**하기 때문에 다른 상황에서 서로 다른 의미를 가질수 있다는 것을 기억해야 한다.<br>
+만약 함수에 2차원 배열을 매개변수로 받고 싶다면 아래와 같이 선언하면 된다.<br>
+```cpp
+함수타입 함수이름(배열타입 *(배열이름[크기], int 배열길이);
+아래는 예시이다.
+int Sample(int *(array)[4], int size);
+또는
+int Sample(int array[][4], int size);
+```
+
+<br> **함수와 구조체** <br>
+아래는 코드 예시이다.
+```cpp
+struct sample
+{
+  int t1;
+  int t2;
+}
+
+sample Function_Sample(sample s1, sample s2)
+{
+  return ((s1.t1 + s2.t1) / (s1.t2 + s2.t2))
+}
+
+void main()
+{
+
+}
+```
