@@ -144,4 +144,61 @@ sample(test);
 즉 원본 데이터가 아닌 test의 복사본을 가지고 작업하기 때문에 sample 함수에서 어떤 작업을 하든 main 함수의 test에 영향을 주지 않는다.<br>
 
 <br> **함수와 배열** <br>
+만약 학생들의 점수의 총 합을 구해야하는 함수가 필요한 상황이라고 가정을 해보자.<br>
+학생들의 점수가 배열에 입력이 되어 있을것이다. 하지만 함수를 사용할때 아래와 같이 함수를 코딩하는 경우가 있을것이다.<br>
+```cpp
+const int Max = 5;
 
+int Sum_score(int x[])
+{
+  int total = 0;
+  for(int i = 0; i < (sizeof(x)/sizeof(int)); i++)
+  {
+    total += x[i];
+  }
+  return total;
+}
+
+void main()
+{
+  int score[Max] = {5, 4, 3, 2, 1};
+  cout << "학생들의 점수 합은 :" << Sum_score(score) << "입니다.";
+}
+```
+위와 같이 코드를 작성하고 실행시 아래와 같은 결과가 나온다.
+```
+학생들의 점수 합은 : 9 입니다.
+```
+분명 socre 의 합은 15인데 0번째와 1번째 인덱스만 더해진 9가 출력된게 된다.<br>
+그 이유는 매개변수로 배열 전달시 배열이 주소값을 넘겨줌으로 메서드 안에서 sizeof 함수를 사용하면 포인터의 길이를 넘겨주기 때문이다.<br>
+C++ 에서는 **Call by Value(값에 의한 전달 방식)** 의 한계를 극복하기 위해 **Call by Address(주소에 의한 전달 방식)** 을 사용하기 때문이다.<br>
+즉 배열을 매개변수로 넘겨주어 그 배열을 합을 구하기 위해서는 같이 그 배열의 길이를 넘겨주어야 한다.
+```cpp
+const int Max = 5;
+
+int Sum_score(int x[], int len)
+{
+  int total = 0;
+  for(int i = 0; i < len; i++)
+  {
+    total += x[i];
+  }
+  return total;
+}
+
+void main()
+{
+  int score[Max] = {5, 4, 3, 2, 1};
+  cout << "학생들의 점수 합은 :" << Sum_score(score,Max) << "입니다.";
+}
+```
+위 코드를 실행하면 아래와 같이 정상적으로 실행된다
+```
+학생들의 점수 합은 : 15 입니다.
+```
+또한 위 코드에서 함수원형 부분을 아래와 같이 수정해도 정삭적으로 작동한다.
+```cpp
+int Sum_score(int *x, int len)
+```
+*arr, int arr[] 두개 모두 int 형을 지시하는 포인터를 의미하기 때문이다. <br>
+단 int arr[] 은 배열의 **첫 번째 원소를 지시**하기 때문에 다른 상황에서 서로 다른 의미를 가질수 있다는 것을 기억해야 한다.<br>
