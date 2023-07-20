@@ -421,3 +421,78 @@ void main()
 이렇게 매개 변수 입력에 따라 실행되는 함수가 달라진다.
 
 <br> **함수 템플릿** <br>
+이해를 돕기 위해 간단한 예시를 먼저 보겠다.
+```cpp
+template <Typename T>
+
+T sum(T a, T b)
+{
+  return a + b;
+}
+void main(){
+  int a = 1, b =2;
+
+  double c = 2.2;
+  double d  = 3.3;
+
+  string s1 = "Template ";
+  string s2 = "Sample";
+
+  cout << sum<int>(a,b) << endl;
+  cout << sum<double>(d1,d2) << endl;
+  cout << sum<string>(s1,s2) << endl;
+}
+```
+위 코드를 실행시키면 아래와 같은 결과가 나온다.
+```
+3
+5.5
+Template Sample
+```
+하나의 함수로 여러 자료형의 계산을 처리하였다. 이와 같은 기능을 할수있게 해주는게 템플릿 함수이다.<br>
+단 템플릿 함수를 호출할때 명확하게 어떤 자료형을 쓸 건지 <>안에 표시해주는게 좋다.<br>
+또한 템플릿도 아래와 같이 오보로딩이 가능하다.
+```cpp
+template <typename T>
+T Sample(T a, T b)
+{
+  ...
+}
+T Sample(T a)
+{
+  ...
+}
+```
+또한 템플릿의 투명한 커스터마이징을 위해 명시적 특수화가 도입되었다.<br>
+아래는 예시이다.<br>
+```cpp
+template <typename T>
+T Sample(T a)
+{
+  return 0;
+}
+//명시적 특수화
+template <>
+int Test<int>(int a)
+{
+  return 1;
+}
+
+void main()
+{
+  cout << Test("SSS") << endl;
+  cout << Test(2) << endl;
+}
+```
+위 코드 실행시 아래와 같은 결과가 출력된다.
+```
+0
+1
+```
+결과를 보면 알수 있다 싶이 템플릿 함수에 int형 변수가 들어가면 1이 return 되는걸 알수 있다.<br>
+또한 함수 호출의 우선순위는 아래와 같다.
+```
+1. 일반함수
+2. 명시적 특수화된 함수 템플릿
+3. 함수 템플릿
+```
