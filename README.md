@@ -396,3 +396,28 @@ void Sample(int x, int y)
 디폴트 매개변수를 사용할때는 꼭 오른쪽에서 왼쪽 순서로 첨가해야한다.
 
 <br> **함수 오버로딩** <br>
+서로 다른 여러 개의 함수가 하나의 이름을 공유하는 것을 함수 오버로딩 이라고 부른다.<br>
+아래는 예제이다.
+```cpp
+void Sample(int a)
+{
+  return (a*3)
+}
+void Sample(int a, intb)
+{
+  return (a*b)
+}
+void main()
+{
+  cout << Sample(3)
+  cout << Sample(10,3)
+}
+```
+결과는 아래와 같다.
+```
+9
+30
+```
+이렇게 매개 변수 입력에 따라 실행되는 함수가 달라진다.
+
+<br> **함수 템플릿** <br>
